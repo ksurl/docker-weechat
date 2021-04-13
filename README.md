@@ -4,7 +4,7 @@
 
 [![](https://img.shields.io/github/v/tag/ksurl/docker-weechat?label=image%20version&logo=docker)](https://hub.docker.com/r/ksurl/weechat) [![](https://img.shields.io/docker/image-size/ksurl/weechat/latest?color=lightgrey&logo=Docker)]() [![](https://img.shields.io/github/workflow/status/ksurl/docker-weechat/build?label=build&logo=Docker)](https://github.com/ksurl/docker-weechat/actions?query=workflow%3Abuild)
 
-* Based on ghcr.io/ksurl/baseimage-alpine
+* Based on alpine
 
 ## Usage
 
