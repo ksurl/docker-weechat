@@ -1,4 +1,4 @@
-FROM        ghcr.io/ksurl/baseimage-alpine
+FROM        alpine
 
 LABEL       org.opencontainers.image.source="https://github.com/ksurl/docker-weechat"
 
@@ -9,7 +9,10 @@ WORKDIR     /config
 ENV         TERM=screen-256color \
             LANG=C.UTF-8
 
-RUN         echo "**** install build packages ****" && \
+COPY        init /init
+
+RUN         chmod +x /init && \
+            echo "**** install build packages ****" && \
             apk add --no-cache --virtual=build-dependencies \
                 cmake \
                 gettext-dev \
@@ -31,14 +34,22 @@ RUN         echo "**** install build packages ****" && \
                 jq \
                 tar && \
             echo "**** install packages ****" && \
+            apk -U upgrade && \
             apk add --no-cache \
+                aspell-libs \
                 curl \
+                dumb-init \
                 gettext \
                 gnutls \
                 libgcrypt \
+                lua \
                 ncurses \
                 python3 \ 
-                perl && \
+                perl \
+                ruby \
+                shadow \
+                su-exec \
+                tzdata && \
             echo "**** update ca-certificates ****" && \
             update-ca-certificates && \
             echo "**** install weechat ****" && \
@@ -50,11 +61,19 @@ RUN         echo "**** install build packages ****" && \
             cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=None -DENABLE_MAN=ON -DENABLE_TCL=OFF -DENABLE_GUILE=OFF -DENABLE_JAVASCRIPT=OFF -DENABLE_PHP=OFF && \
             make && \
             make install && \
+            echo "**** create user ****" && \
+            groupmod -g 1000 users && \
+            useradd -u 911 -U -d /config -s /bin/false abc && \
+            usermod -G users abc && \
+            mkdir -p /config && \
+            echo "**** disable root login ****" && \
+            sed -i -e 's/^root::/root:!:/' /etc/shadow && \            
             echo "**** cleanup ****" && \
             apk del --purge build-dependencies && \
             rm -rf /tmp/* /var/cache/apk/*
 
-COPY        root/ /
-
 EXPOSE      9001
 VOLUME      /config /downloads
+
+ENTRYPOINT  [ "/usr/bin/dumb-init", "--" ]
+CMD         [ "/init" ]

@@ -11,6 +11,6 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - <HOST>/config:/config/.weechat
+      - <HOST>/config:/config
       - <HOST>/downloads:/downloads
     restart: unless-stopped

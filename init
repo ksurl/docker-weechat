@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# set uid and gid
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" abc
+usermod -o -u "$PUID" abc
+
+# set timezone
+echo "Setting timezone to $TZ."
+cp -f "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone
+
+# permissions
+chown -R abc:abc /config
+chown abc:abc /downloads
+
+# Loop until an active internet connection is established
+until $(curl --max-time 60 -s -o /dev/null https://duckduckgo.com/); do
+  # Sleep to allow cooldown
+  sleep 10
+done
+
+su-exec ${PUID}:${PGID} /usr/bin/weechat --dir /config
