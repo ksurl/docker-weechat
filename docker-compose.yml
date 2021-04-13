@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  flexget:
+    image: ghcr.io/ksurl/weechat
+    container_name: weechat
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    stdin_open: true
+    tty: true
+    volumes:
+      - <HOST>/config:/config/.weechat
+      - <HOST>/downloads:/downloads
+    restart: unless-stopped
