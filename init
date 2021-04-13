@@ -4,16 +4,13 @@
 PUID=${PUID:-911}
 PGID=${PGID:-911}
 
-groupmod -o -g "$PGID" abc
-usermod -o -u "$PUID" abc
-
 # set timezone
 echo "Setting timezone to $TZ."
 cp -f "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone
 
 # permissions
-chown -R abc:abc /config
-chown abc:abc /downloads
+chown -R ${PUID}:${PGID} /config
+chown ${PUID}:${PGID} /downloads
 
 # Loop until an active internet connection is established
 until $(curl --max-time 60 -s -o /dev/null https://duckduckgo.com/); do

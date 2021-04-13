@@ -61,13 +61,6 @@ RUN         chmod +x /init && \
             cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=None -DENABLE_MAN=ON -DENABLE_TCL=OFF -DENABLE_GUILE=OFF -DENABLE_JAVASCRIPT=OFF -DENABLE_PHP=OFF && \
             make && \
             make install && \
-            echo "**** create user ****" && \
-            groupmod -g 1000 users && \
-            useradd -u 911 -U -d /config -s /bin/false abc && \
-            usermod -G users abc && \
-            mkdir -p /config && \
-            echo "**** disable root login ****" && \
-            sed -i -e 's/^root::/root:!:/' /etc/shadow && \            
             echo "**** cleanup ****" && \
             apk del --purge build-dependencies && \
             rm -rf /tmp/* /var/cache/apk/*
