@@ -21,7 +21,7 @@
 
 ### docker-compose
 
-    version: "3.8"
+    version: "3"
     services:
       weechat:
         image: ghcr.io/ksurl/weechat
