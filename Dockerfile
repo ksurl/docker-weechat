@@ -27,10 +27,11 @@ RUN         chmod +x /init && \
                 ruby \
                 shadow \
                 su-exec \
+                ttyd \
                 tzdata \
                 weechat && \
-            echo "**** update ca-certificates ****" && \
-            update-ca-certificates && \
+            #echo "**** update ca-certificates ****" && \
+            #update-ca-certificates && \
             echo "**** cleanup ****" && \
             rm -rf /tmp/* /var/cache/apk/*
 

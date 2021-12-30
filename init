@@ -18,4 +18,4 @@ until $(curl --max-time 60 -s -o /dev/null https://duckduckgo.com/); do
   sleep 10
 done
 
-su-exec ${PUID}:${PGID} /usr/bin/weechat --dir /config
+su-exec ${PUID}:${PGID} /usr/bin/ttyd /usr/bin/weechat --dir /config
