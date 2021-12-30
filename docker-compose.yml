@@ -8,8 +8,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-    stdin_open: true
-    tty: true
+    ports:
+      - 7681:7681
     volumes:
       - <HOST>/config:/config
       - <HOST>/downloads:/downloads
