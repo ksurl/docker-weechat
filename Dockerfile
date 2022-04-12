@@ -11,7 +11,8 @@ ENV         TERM=screen-256color \
 
 COPY        init /init
 
-RUN         chmod +x /init && \
+RUN         set -x; \
+            chmod +x /init && \
             echo "**** install packages ****" && \
             apk add --no-cache \
                 aspell-libs \
