@@ -4,12 +4,12 @@ services:
     image: ghcr.io/ksurl/weechat
     container_name: weechat
     network_mode: bridge
+    stdin_open: true
+    tty: true
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-    ports:
-      - 7681:7681
     volumes:
       - <HOST>/config:/config
       - <HOST>/downloads:/downloads

@@ -28,15 +28,11 @@ RUN         set -x; \
                 ruby \
                 shadow \
                 su-exec \
-                ttyd \
                 tzdata \
                 weechat && \
-            #echo "**** update ca-certificates ****" && \
-            #update-ca-certificates && \
             echo "**** cleanup ****" && \
             rm -rf /tmp/* /var/cache/apk/*
 
-EXPOSE      9001
 VOLUME      /config /downloads
 
 ENTRYPOINT  [ "/usr/bin/dumb-init", "--" ]
