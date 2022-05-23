@@ -1,4 +1,4 @@
-FROM        alpine:3.15.4
+FROM        alpine:3.16.0
 
 LABEL       org.opencontainers.image.source="https://github.com/ksurl/docker-weechat"
 
@@ -21,10 +21,8 @@ RUN         set -x; \
                 gettext \
                 gnutls \
                 libgcrypt \
-                #lua \
                 ncurses \
                 python3 \ 
-                #perl \
                 ruby \
                 shadow \
                 su-exec \
