@@ -1,6 +1,5 @@
-version: "3"
 services:
-  flexget:
+  weechat:
     image: ghcr.io/ksurl/weechat
     container_name: weechat
     network_mode: bridge
@@ -11,6 +10,6 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - <HOST>/config:/config
-      - <HOST>/downloads:/downloads
+      - ./config:/config
+      - ./downloads:/downloads
     restart: unless-stopped

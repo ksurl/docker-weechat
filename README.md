@@ -21,7 +21,6 @@
 
 ### docker-compose
 
-    version: "3"
     services:
       weechat:
         image: ghcr.io/ksurl/weechat
@@ -32,8 +31,8 @@
           - PGID=1000
           - TZ=UTC
         volumes:
-          - <HOST>/config:/config
-          - <HOST_MNT>/downloads:/downloads
+          - ./config:/config
+          - ./downloads:/downloads
         restart: unless-stopped
 
 ### Parameters
