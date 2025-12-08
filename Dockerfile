@@ -1,4 +1,4 @@
-FROM        alpine:3.22.1
+FROM        alpine:3.23.0
 
 LABEL       org.opencontainers.image.source="https://github.com/ksurl/docker-weechat"
 
